@@ -1,0 +1,34 @@
+{
+  "name": "shary",
+  "version": "1.0.0",
+  "description": "Food Shary enables society to share food with others that can't provide themselves with a warm meal. It aims to end world hunger and food wasting.",
+  "main": "index.js",
+  "scripts": {
+    "devStart": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkoP3/food-shary.git"
+  },
+  "author": "Marko Puzovic",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarkoP3/food-shary/issues"
+  },
+  "homepage": "https://github.com/MarkoP3/food-shary#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.1",
+    "method-override": "^3.0.0",
+    "mysql": "^2.18.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
