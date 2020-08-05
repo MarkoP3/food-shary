@@ -8,7 +8,9 @@ function register(){
 function donate(){
     if(document.getElementById('stations').selectedIndex!=-1)
     {
-    socket.emit('donate',{token:localStorage.getItem('token'),station:document.getElementById('stations').options[document.getElementById('stations').selectedIndex].id,quantity:document.getElementById('quantity').value});
+    
+        socket.emit('donate',{token:localStorage.getItem('token'),station:document.getElementById('stations').options[document.getElementById('stations').selectedIndex].id,quantity:document.getElementById('quantity').value});
+        getStations();
     }
 }
 socket.on('loginOk',(token)=>{
@@ -82,13 +84,13 @@ function getStations()
 }
 function setMaxValue()
 {
-    if(document.getElementById('stations').selectedIndex!=-1)
+    if(document.getElementById('stations').options[document.getElementById('stations').selectedIndex].value!=0)
     {
         document.getElementById('quantity').setAttribute('max',document.getElementById('stations').options[document.getElementById('stations').selectedIndex].value);
-        document.getElementById('quantity').disabled=false;
+        document.getElementById('donateBtn').disabled=false;
     }else
     {
-        document.getElementById('quantity').disabled=true;}
+        document.getElementById('donateBtn').disabled=true;}
 }
 function getLocation() {
     if (navigator.geolocation) {

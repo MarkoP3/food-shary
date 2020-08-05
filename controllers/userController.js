@@ -67,6 +67,7 @@ function UserController(donors,mysql,stations){
                   else if(!returnUserByEmail(email,this.users).sockets.includes(socket))
                   {
                       returnUserByEmail(email,this.users).sockets.push(socket);
+                      donors.to(socket).emit('loginOk', returnUserByEmail(email,this.users).token);
                   }
                 } else {
                     donors.to(socket).emit('loginError',{message:"Password incorrect"});
