@@ -1,0 +1,14 @@
+[{
+    "host":"eu-cdbr-west-03.cleardb.net",
+    "user":"b0f6e98c336646",
+    "password":"5b39b527",
+    "database":"heroku_cd2500fde82f03a",
+    "multipleStatements":"true"
+},
+{
+    "host":"localhost",
+    "user":"root",
+    "password":"",
+    "database":"shary",
+    "multipleStatements":"true"
+}]

@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <script src="/socket.io/socket.io.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+        <link href="/public/css/donor.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <meta charset="UTF-8">
+        <meta name="description" content="Food sharing app">
+        <meta name="keywords" content="Food, Share, Social, Donate, Donation, Meal">
+        <meta name="author" content="Mako Puzovic">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body onload="openScreen('loginForm')">
+    <section id="loginForm" class="formContainer">
+        <form  align="center" action="javascript:login()" class="col-10 col-xl-4 col-md-4 col-lg-4 p-0 m-0">
+            <div class="formHeader">
+                <img src="/public//img/foodBasket.svg">
+                <div class="title">Shary</div>
+                <div class="subtitle">Don't waste share!</div>
+            </div>
+            <div class="formBody">
+                <input type="email" id="email" required placeholder="email"><br>
+                <input type="password" id="password" required placeholder="password"><br>
+                <input type="submit" value="Login" class="btn btn-primary">
+            </div>
+            <div class="formFooter">
+                <div class="btn btn-link">Don't have an account? Sign up here</div>
+            </div>
+        </form>
+    </section>
+    
+    <section id="registerForm" class="formContainer">
+        <form  align="center" action="javascript:register()" class="col-10 col-xl-4 col-md-4 col-lg-4 p-0 m-0">
+            <div class="formHeader">
+                <img src="/public//img/foodBasket.svg">
+                <div class="title">Shary</div>
+                <div class="subtitle">Don't waste share!</div>
+            </div>
+            <div class="formBody">
+                <input type="text" id="nameR" required placeholder="Name">
+                <input type="text" id="surnameR" required placeholder="Surname">
+                <input type="email" id="emailR" required placeholder="Email">
+                <input type="text" id="phoneNumberR" required placeholder="Phone number">
+                <input type="password" id="passwordR" required placeholder="Password" >
+                <input type="submit" value="Register" class="btn btn-primary">
+            </div>
+            <div class="formFooter">
+                <div class="btn btn-link">Have an account? Login here</div>
+            </div>
+        </form>
+    </section>
+    <section id="donationSection" class="row m-0 p-0">
+        <div class="newDonation col-12">
+            <div class="map" id="map">
+                
+            </div>
+            <select id="cities" onchange="getStations()">
+            </select>
+            <select id="stations">
+            
+            </select>
+            <form action="javascript:donate()">
+            <input type="number" id="quantity" min="1" required>
+            <input type="submit"  value="Donate">
+            </form>
+        </div>
+        <div id="userDonations" class="col-12">
+           <table class="table">
+            <thead class="thead-dark"> 
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Town</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Approved</th>
+                  </tr>
+            </thead>
+            <tbody id="donationsTable">
+               <tr>
+                   <td>Subotica</td>
+                   <td>Vase Stajica 15/17</td>
+                   <td>2020-08-03</td>
+                   <td>10</td>
+                   <td>Approved</td>
+               </tr>
+            </tbody>
+           </table>
+        </div>
+    </section>
+
+    <div id="donationInfo" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Donation info</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="town" class="col-form-label">Town:</label>
+                    <div class="form-control" id="town"></div>
+                    <label for="address" class="col-form-label">Address:</label>
+                    <div class="form-control" id="address"></div>
+                    <label for="date" class="col-form-label">Donation date:</label>
+                    <div class="form-control" id="date"></div>
+                    <label for="quantity" class="col-form-label">quantity</label>
+                    <div class="form-control" id="quantity"></div>
+                    <label for="approved" class="col-form-label">Status</label>
+                    <div class="form-control" id="approved"></div>
+                  </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </body>
+    <script src="/public/js/donor.js"></script>
+</html>
