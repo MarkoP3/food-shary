@@ -11,4 +11,11 @@
     "password":"",
     "database":"shary",
     "multipleStatements":"true"
+},
+{
+    "host":"zwgaqwfn759tj79r.chr7pe7iynqr.eu-west-1.rds.amazonaws.com",
+    "user":"qwtjt92qfkzbhn8h",
+    "password":"cx1zyuavnimq7c4p",
+    "database":"nbbgftd2x4txd0zt",
+    "multipleStatements":"true"
 }]

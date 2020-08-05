@@ -5,7 +5,7 @@ function  MysqlController(done)
      fs.readFile('./config/dbConfig.json','utf-8',async (error,data)=>{
         if(error)
         throw error;
-        dbConfig=JSON.parse(data)[1];
+        dbConfig=JSON.parse(data)[2];
         this.pool=await mysql.createPool(dbConfig);
         this.pool.getConnection((error,connection)=>{
             this.connection=connection;
