@@ -12,7 +12,13 @@
         <meta name="author" content="Mako Puzovic">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body onload="openScreen('loginForm')">
+    <body>
+        <section style="height: 100vh;">
+            <div style="width: 100vw;margin: auto;padding: 50px;" align="center">
+            <h1>Loading...</h1>
+            <div class="loader"></div>
+        </div>
+        </section>
     <section id="loginForm" class="formContainer">
         <form  align="center" action="javascript:login()" class="col-10 col-xl-4 col-md-4 col-lg-4 p-0 m-0">
             <div class="formHeader">
@@ -26,7 +32,7 @@
                 <input type="submit" value="Login" class="btn btn-primary">
             </div>
             <div class="formFooter">
-                <div class="btn btn-link">Don't have an account? Sign up here</div>
+                <div class="btn btn-link" onclick="openScreen('registerForm');">Don't have an account? Sign up here</div>
             </div>
         </form>
     </section>
@@ -47,24 +53,38 @@
                 <input type="submit" value="Register" class="btn btn-primary">
             </div>
             <div class="formFooter">
-                <div class="btn btn-link">Have an account? Login here</div>
+                <div class="btn btn-link" onclick="openScreen('loginForm');">Have an account? Login here</div>
             </div>
         </form>
     </section>
     <section id="donationSection" class="row m-0 p-0">
-        <div class="newDonation col-12">
-            <div class="map" id="map">
-                
+        <div class="newDonation col-12 row p-0 m-0">
+            <div class="header col-12 row p-0 m-0">
+                <div class="logo col-8">
+                    <span class="logoText  mt-2 mb-2">Shary</span>
+                    </div>
+                <div class="logoutBtn col-4 ">
+                    <button class="btn btn-primary float-right mt-2 mb-2" onclick="logout();">Logout</button>
+                </div>
             </div>
-            <select id="cities" onchange="getStations()">
-            </select>
-            <select id="stations">
-            
-            </select>
-            <form action="javascript:donate()">
-            <input type="number" id="quantity" min="1" required>
-            <input type="submit" id="donateBtn"  value="Donate">
-            </form>
+            <div class="body row p-3 m-0">
+                <div class="inputValues m-auto col-12 col-md-4 col-xl-4 col-lg-4">
+                <div>Select a town to donate to:</div>
+                <select class="custom-select" id="cities" onchange="getStations()">
+                </select>
+                <div>Select a station that you want to donate to:</div>
+                <select class="custom-select" id="stations">
+                </select>
+                <div>Enter the amount of meals that you want to donate:</div>
+                <form action="javascript:donate()">
+                <input type="number" id="quantity" min="1" required>
+                <input type="submit" id="donateBtn"  value="Donate">
+                </form>
+            </div>
+            <div class="map col-12 col-md-8 col-xl-8 col-lg-8">
+                <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90593.22323454234!2d20.430847999999997!3d44.8004096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a6549015c2c53%3A0x160b799f3d48d2b2!2z0JHQtdC-0LPRgNCw0LTRgdC60LAg0YLQstGA0ZLQsNCy0LA!5e0!3m2!1ssr!2srs!4v1596828233116!5m2!1ssr!2srs" style="min-height: 400px;" width="100%" height="100%" frameborder="0" style="padding:20px;" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe>
+            </div>
+        </div>
         </div>
         <div id="userDonations" class="col-12">
            <table class="table">
@@ -77,13 +97,6 @@
                   </tr>
             </thead>
             <tbody id="donationsTable">
-               <tr>
-                   <td>Subotica</td>
-                   <td>Vase Stajica 15/17</td>
-                   <td>2020-08-03</td>
-                   <td>10</td>
-                   <td>Approved</td>
-               </tr>
             </tbody>
            </table>
         </div>

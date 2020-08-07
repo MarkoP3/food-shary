@@ -1,6 +1,7 @@
 let socket=io.connect('/donor?token='+localStorage.getItem('token'));
 function login(){
     socket.emit('login',{email:document.getElementById('email').value,password:document.getElementById('password').value});
+    document.getElementById('email').value=''; document.getElementById('password').value='';
 }
 function register(){
     socket.emit('register',{email:document.getElementById('emailR').value,password:document.getElementById('passwordR').value,phoneNumber:document.getElementById('phoneNumberR').value,name:document.getElementById('nameR').value,surname:document.getElementById('surnameR').value});
@@ -23,7 +24,6 @@ socket.on('loginOk',(token)=>{
 });
 socket.on('loginError',error=>{
     openScreen('loginForm');
-alert(error.message);
 });
 socket.on('userDonations',data=>{
     let table=document.getElementById('donationsTable');
@@ -67,7 +67,22 @@ socket.on('stations',data=>{
 socket.on('failedAuthentication',()=>{
     alert('You need to login to peform this action!');
 });
-
+socket.on('logout',()=>{
+    openScreen('loginForm');
+    clearData();
+});
+socket.on('registerOk',()=>{
+    openScreen('loginForm');
+    document.getElementById('nameR').value='';
+    document.getElementById('surnameR').value='';
+    document.getElementById('emailR').value='';
+    document.getElementById('phoneNumberR').value='';
+    document.getElementById('passwordR').value='';
+});
+function logout()
+{
+    socket.emit('logout',localStorage.getItem('token'));
+}
 function openScreen(screen){
     Array.prototype.slice.call(document.getElementsByTagName('section')).forEach(element => {
         if(element.id!=screen)
@@ -108,4 +123,11 @@ $('#donationInfo').on('show.bs.modal', function (event) {
     $(this).find('.modal-body #date').text(button.data('date'));
     $(this).find('.modal-body #quantity').text(button.data('quantity'));
     $(this).find('.modal-body #approved').text(button.data('approved'));
-  })
+  });
+  function clearData()
+  {
+      document.getElementById('donationsTable').innerHTML='';
+      document.getElementById('cities').innerHTML='';
+      document.getElementById('stations').innerHTML='';
+      document.getElementById('map').src='';
+  }

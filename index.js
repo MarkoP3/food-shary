@@ -31,6 +31,9 @@ donors.on('connect',socket=>{
   if(userController!=undefined && userController.authenticate(socket.handshake.query.token,socket.id,userController.users)){
     donors.to(socket.id).emit('loginOk',socket.handshake.query.token);
   }
+  else{
+    donors.to(socket.id).emit('loginError',{message:'You need to loggin!'});
+  }
   socket.on('login',(data)=>{
     userController.login(data.email,data.password,socket.id);
   });
@@ -88,6 +91,9 @@ donors.on('connect',socket=>{
     {
      donors.to(socket.id).emit('failedAuthentication');
     }
+  });
+  socket.on('logout',(token)=>{
+    userController.logout(token);
   });
 });
 acceptors.on('connect',socket=>{

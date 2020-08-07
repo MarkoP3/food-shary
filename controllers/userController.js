@@ -89,7 +89,7 @@ function UserController(donors,mysql,stations){
         if(checkToken(token,this.users))
             {
                 this.returnUserByToken(token,this.users).sockets.forEach(socket=> donors.to(socket).emit('logout'));
-                users.splice(users.indexOf(this.returnUserByToken(token,this.users)),1);
+                this.users.splice(this.users.indexOf(this.returnUserByToken(token,this.users)),1);
             }
     }
     this.logoutStation=async(token)=>{
