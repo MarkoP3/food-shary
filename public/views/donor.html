@@ -64,10 +64,12 @@
                     <span class="logoText  mt-2 mb-2">Shary</span>
                     </div>
                 <div class="logoutBtn col-4 ">
-                    <button class="btn btn-primary float-right mt-2 mb-2" onclick="logout();">Logout</button>
+                    <button class="btn btn-secondary float-right mt-2 mb-2" onclick="logout();">Logout</button>
                 </div>
             </div>
-            <div class="body row p-3 m-0">
+            <button id="toggleBtnNewDonation"class=" btn btn-dark p-2 m-4 collapsed" data-toggle="collapse" data-target="#donationBody" aria-expanded="false" aria-controls="donationBody">New donation</button>
+            <span>Don't waste share.</span>
+            <div class="body jumbotron bg-dark row p-0 m-4 collapse" id="donationBody">
                 <div class="inputValues m-auto col-12 col-md-4 col-xl-4 col-lg-4">
                 <div>Select a town to donate to:</div>
                 <select class="custom-select" id="cities" onchange="getStations()">
@@ -82,7 +84,7 @@
                 </form>
             </div>
             <div class="map col-12 col-md-8 col-xl-8 col-lg-8">
-                <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90593.22323454234!2d20.430847999999997!3d44.8004096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a6549015c2c53%3A0x160b799f3d48d2b2!2z0JHQtdC-0LPRgNCw0LTRgdC60LAg0YLQstGA0ZLQsNCy0LA!5e0!3m2!1ssr!2srs!4v1596828233116!5m2!1ssr!2srs" style="min-height: 400px;" width="100%" height="100%" frameborder="0" style="padding:20px;" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe>
+                <iframe id="map" class="mt-3 mb-3" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90593.22323454234!2d20.430847999999997!3d44.8004096!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a6549015c2c53%3A0x160b799f3d48d2b2!2z0JHQtdC-0LPRgNCw0LTRgdC60LAg0YLQstGA0ZLQsNCy0LA!5e0!3m2!1ssr!2srs!4v1596828233116!5m2!1ssr!2srs" style="min-height: 400px;" width="100%" height="100%" frameborder="0" style="padding:20px;" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe>
             </div>
         </div>
         </div>

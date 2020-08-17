@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-port = ( process.env.PORT!=undefined ? process.env.PORT : 8080 );
+port = ( process.env.PORT!=undefined ? process.env.PORT : 8081 );
 const server = app.listen(port);
 const io = require('socket.io').listen(server);
 const bcrypt = require('bcrypt');
@@ -32,7 +32,7 @@ donors.on('connect',socket=>{
     donors.to(socket.id).emit('loginOk',socket.handshake.query.token);
   }
   else{
-    donors.to(socket.id).emit('loginError',{message:'You need to loggin!'});
+    donors.to(socket.id).emit('loginError',null);
   }
   socket.on('login',(data)=>{
     userController.login(data.email,data.password,socket.id);
@@ -97,6 +97,15 @@ donors.on('connect',socket=>{
   });
 });
 acceptors.on('connect',socket=>{
+  if(mysql)
+  mysql.connection.query("SELECT * from town",(error,result)=>{
+    acceptors.to(socket.id).emit("towns",result);
+  });
+  socket.on('getStations',(townID)=>{
+    mysql.connection.query('SELECT mealCount,latitude,longitude,address from station where townID=?',townID,(error,result)=>{
+      acceptors.to(socket.id).emit('stations',result);
+    });
+  })
 });
 
 stations.on('connect',socket=>{

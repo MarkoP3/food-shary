@@ -24,6 +24,7 @@ socket.on('loginOk',(token)=>{
 });
 socket.on('loginError',error=>{
     openScreen('loginForm');
+    if(error)alert(error.message);
 });
 socket.on('userDonations',data=>{
     let table=document.getElementById('donationsTable');
@@ -129,5 +130,4 @@ $('#donationInfo').on('show.bs.modal', function (event) {
       document.getElementById('donationsTable').innerHTML='';
       document.getElementById('cities').innerHTML='';
       document.getElementById('stations').innerHTML='';
-      document.getElementById('map').src='';
   }

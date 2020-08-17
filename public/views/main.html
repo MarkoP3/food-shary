@@ -3,8 +3,40 @@
         <script src="/socket.io/socket.io.js"></script>
         <script src="/public/js/main.js"></script>
         <link href="/public/css/main.css" rel="stylesheet">
-    </head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css" integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="description" content="Food sharing app">
+<meta name="keywords" content="Food, Share, Social, Donate, Donation, Meal">
+<meta name="author" content="Mako Puzovic">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
     <body>
-        
+      <div id="userSelection" class="userSelection" align="center">
+        <div class="btnContainer">
+          <span class="text-primary display-1">Shary</span>
+          <span>Are you here for the meal or to donate?</span>
+          <a href="/donor" class="btn btn-light">
+            I want to donate
+          </a>
+          <a onclick="connectUser()" class="btn btn-light">
+            I need a meal
+          </a>
+        </div>
+      </div>
+      <div class="donationContainer" >
+        <div class="towns">
+          <select id="townSelect" class="custom-select" onchange="socket.emit('getStations',this.options[this.selectedIndex].value)">
+            
+          </select>
+        </div>
+        <div id="map" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+
+      <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDc7V74brKLCIzQd1ELBRj1iITl1bFcC1A">
+    </script>
     </body>
 </html>

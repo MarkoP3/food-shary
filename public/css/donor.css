@@ -1,8 +1,10 @@
 body{
+background: #9CD8F7  center no-repeat;
+background-size: cover;
 }
 .formContainer{
     background-color:#9CD8F7;
-    display: flex;
+    display: none;
   align-items: center;
   flex-direction: column; 
   justify-content: center;
@@ -49,6 +51,9 @@ body{
     border-top: 1px solid #dce8f1;
     border-radius:0 0 10px 10px;
 }
+#donationSection{
+    display: none;
+}
 #donationSection .newDonation
 {
     display:block;
@@ -72,6 +77,7 @@ body{
 }
 .table{
     text-align: center;
+    background-color: white;
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.3);
 }
 .table tbody tr:hover{
