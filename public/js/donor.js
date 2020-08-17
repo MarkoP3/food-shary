@@ -1,4 +1,5 @@
 let socket=io.connect('/donor?token='+localStorage.getItem('token'));
+let userPosition={};
 function login(){
     socket.emit('login',{email:document.getElementById('email').value,password:document.getElementById('password').value});
     document.getElementById('email').value=''; document.getElementById('password').value='';
@@ -9,8 +10,7 @@ function register(){
 function donate(){
     if(document.getElementById('stations').selectedIndex!=-1)
     {
-    
-        socket.emit('donate',{token:localStorage.getItem('token'),station:document.getElementById('stations').options[document.getElementById('stations').selectedIndex].id,quantity:document.getElementById('quantity').value});
+        socket.emit('donate',{token:localStorage.getItem('token'),station:JSON.parse(document.getElementById('stations').options[document.getElementById('stations').selectedIndex].value).ID,quantity:document.getElementById('quantity').value});
         getStations();
     }
 }
@@ -59,8 +59,7 @@ socket.on('stations',data=>{
     data.forEach(station=>{
         let option=document.createElement('option');
         option.text=station.address;
-        option.id=station.ID;
-        option.value=station.maxMeal-station.mealCount-station.waitingCount;
+        option.value=JSON.stringify(station);
         stations.add(option);
     });
     setMaxValue();
@@ -100,20 +99,32 @@ function getStations()
 }
 function setMaxValue()
 {
-    if(document.getElementById('stations').options[document.getElementById('stations').selectedIndex].value!=0)
+    let selectedItem=JSON.parse(document.getElementById('stations').options[document.getElementById('stations').selectedIndex].value);
+    if(selectedItem.maxMeal-selectedItem.mealCount-selectedItem.waitingCount!=0)
     {
-        document.getElementById('quantity').setAttribute('max',document.getElementById('stations').options[document.getElementById('stations').selectedIndex].value);
+        document.getElementById('quantity').setAttribute('max',selectedItem.maxMeal-selectedItem.mealCount-selectedItem.waitingCount);
         document.getElementById('donateBtn').disabled=false;
     }else
     {
         document.getElementById('donateBtn').disabled=true;}
+        initMap({lat:selectedItem.latitude,lng:selectedItem.longitude});
+}
+function initMap(station)
+{
+    var map = new google.maps.Map(
+        document.getElementById('map'), {zoom: 11, center:station });
+        new google.maps.Marker({position:station, map: map,icon:"/public/img/stationMarkerIcon.png"});
+        if(userPosition.lat && userPosition.lng)
+        new google.maps.Marker({position: userPosition,title:"You are here", map: map,icon:"/public/img/userLocationMarkerIcon.png"});
+     
+    
 }
 function getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position=>{
-        console.log(position);
-        // document.getElementById('map').innerHTML=`<img src="https://maps.googleapis.com/maps/api/staticmap?center=${position.coords.latitude},${position.coords.longitude}&zoom=14&size=400x300&sensor=false&key=AIzaSyDc7V74brKLCIzQd1ELBRj1iITl1bFcC1A">`
-      });
+        userPosition.lat=position.coords.latitude;
+        userPosition.lng=position.coords.longitude;
+    });
     }
   }  
 

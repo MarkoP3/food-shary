@@ -69,7 +69,7 @@ donors.on('connect',socket=>{
   socket.on('getStations',data=>{
     if(userController.authenticate(data.token,socket.id,userController.users))
     {
-      mysql.connection.query('SELECT station.ID as ID,mealCount,maxMeal,waitingCount,address from station,(SELECT SUM(quantity) as waitingCount,stationID from donation where approved is null GROUP BY stationID) as waitingTable where waitingTable.stationID=station.ID and townID=?',data.town,(error,result)=>{
+      mysql.connection.query('SELECT station.ID as ID,mealCount,maxMeal,ifnull(waitingCount,0) as waitingCount,address,latitude,longitude from station left join (SELECT SUM(quantity) as waitingCount,stationID from donation where approved is null GROUP BY stationID) as waitingTable on(waitingTable.stationID=station.ID) where townID=?;',data.town,(error,result)=>{
         donors.emit('stations',result);
       });
     }  else
@@ -97,7 +97,7 @@ donors.on('connect',socket=>{
   });
 });
 acceptors.on('connect',socket=>{
-  if(mysql)
+  if(mysql.connection!=undefined)
   mysql.connection.query("SELECT * from town",(error,result)=>{
     acceptors.to(socket.id).emit("towns",result);
   });

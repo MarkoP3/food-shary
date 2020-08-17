@@ -19,6 +19,10 @@ body{
     display: block;
     margin: 10px;
 }
+.donationContainer
+{
+    display: none;
+}
 .donationContainer .towns
 {
     position: absolute;

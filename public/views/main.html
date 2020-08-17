@@ -26,9 +26,9 @@
           </a>
         </div>
       </div>
-      <div class="donationContainer" >
+      <div class="donationContainer" id="donationContainer" >
         <div class="towns">
-          <select id="townSelect" class="custom-select" onchange="socket.emit('getStations',this.options[this.selectedIndex].value)">
+          <select id="townSelect" class="custom-select" onchange="socket.emit('getStations',this.options[this.selectedIndex].value);">
             
           </select>
         </div>

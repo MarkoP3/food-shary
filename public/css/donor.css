@@ -63,8 +63,11 @@ background-size: cover;
     width: 100vw;
 }
 .newDonation .body .inputValues input,select{
-
-    margin: 10px;
+    margin-bottom:10px;
+    margin-top:5px;
+}
+.newDonation .body .inputValues span{
+    color:white;
 }
 .newDonation .header .logoutBtn button{
     height: 30px!important;
@@ -72,6 +75,9 @@ background-size: cover;
 .newDonation .header .logo .logoText{
     font-size: 30px;
 }
+.map{
+    min-height: 300px;
+} 
 #userDonations{
     display: block;
 }
